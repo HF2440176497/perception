@@ -1,15 +1,17 @@
 
-
 import numpy as np
-import open3d as o3d
+import cv2
+import os
+import matplotlib.pyplot as plt
 
+KITTI_ROOT = '../mini-kitti/'
+SPLIT = 'training'
+SAMPLE_ID = '000008'
 
 '''
 解析 KITTI 数据集的点云文件和标签文件
 尝试基本的可视化
-
 '''
-
 
 
 def load_velodyne_bin(bin_path):
@@ -288,6 +290,7 @@ def lidar_to_img(pts_lidar, P2, R0, V2C):
 
 def visualize_bev(points, boxes_lidar, sample_id='000008'):
     """BEV鸟瞰图可视化: 点云 + 3D框
+    注意这是在 LiDAR 坐标系下对物体的二维视图
     
     Args:
         points: (N, 4) LiDAR点云 [x,y,z,intensity]
